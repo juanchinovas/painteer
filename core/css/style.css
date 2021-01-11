@@ -1,0 +1,285 @@
+@import url('https://fonts.googleapis.com/css?family=Dancing+Script');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #F1F1F1;
+    display: flex;
+    flex-direction: column;
+}
+
+.page-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-column-gap: 2rem;
+    padding: 0 5rem;
+    background-color: white;
+    box-shadow: 0 0 .2rem rgba(0, 0, 0, .5);
+}
+
+#app-name {
+    font-family: 'Dancing Script';
+    font-size: 2rem;
+    color: rgb(149, 74, 219);
+    align-self: center;
+}
+
+.container-grid-col4 {
+    display: grid;
+    grid-template-columns: auto auto 1fr 1fr;
+    grid-template-rows: 100px;
+}
+
+.color-picker-container {
+    width: 100px;
+    /*border: 5px solid #f8f8f8;*/
+    margin: 5px;
+    padding: 1.5rem;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 5ms;
+}
+
+.color-picker-container:hover, .color-picker-chosen ul li:hover {
+    box-shadow: 0 0 .5rem rgba(149, 74, 219, .5);
+}
+
+.color-picker-container label {
+    position: absolute;
+    display: block;
+    width: 100%;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.color-picker-container input[type='color'] {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.color-picker-chosen {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 5px;
+}
+
+.color-picker-chosen ul, .controls {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.color-picker-chosen ul li  {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    margin: 2px;
+    cursor: pointer;
+    transition: box-shadow 5ms;
+}
+
+.color-picker-chosen ul li > span {
+    width: 100%;
+    height:  100%;
+    display: block;
+}
+
+
+
+.controls {
+    flex-direction: column;
+}
+
+.controls li {
+    padding: 5px;
+}
+
+.controls li button, .controls li select {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    padding: .2rem;
+}
+
+main {
+    padding: .1rem 0;
+    flex-grow: 2;
+    height: calc(100vh - (100px + .2rem));
+}
+
+main > canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.hide {
+    display: none !important;
+}
+
+[role=dialog] {
+    padding: .5rem 2rem;
+    background: white;
+    box-shadow: 0 0 1rem  rgba(0, 0, 0, .5);
+    border-bottom-left-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+}
+
+[role=dialog] header {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #F1F1F1;
+    position: sticky;
+    top: 0;
+    background-color: white;
+}
+
+[role=dialog] header [role=button] {
+    font-size: 2rem;
+    font-weight: 500;
+    padding: 5px;
+    cursor: pointer;
+}
+
+[role=dialog] header [role=button]:hover {
+    font-weight: bold
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-row {
+    flex-direction: row;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.flex-row > *:nth-child(odd) {
+    margin-right: .5rem;
+}
+
+[role=dialog] form .input-container {
+    display: flex;
+    padding: .5rem;
+}
+
+[role=dialog] form .input-container input,
+[role=dialog] form .input-container select,
+[role=dialog] form .input-container select option {
+    padding: .25rem .5rem;
+    width: 100%;
+    border: 1.5px solid #ddd;
+}
+
+[role=dialog] form .input-container label {
+    font-weight: 800;
+}
+
+[role=dialog] footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-top: 1px solid #F1F1F1;
+    position: sticky;
+    bottom: 0;
+    background-color: white;
+    padding: .5rem 2rem;
+}
+
+[role=dialog] footer button {
+    padding: .5rem 2rem;
+}
+
+input:invalid {
+    border-color: red !important;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button i {
+    padding: .3rem;
+    margin-right: .2rem;
+}
+
+#contextal-menu {
+    padding: .5rem;
+    background-color: #fff;
+    width: 200px;
+    position: absolute;
+    box-shadow: 0 0 .2rem  rgba(0, 0, 0, .5);
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    z-index: 20000;
+}
+
+#contextal-menu ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#contextal-menu ul li {
+    padding: .2rem .53212rem;
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+#contextal-menu ul li:nth-child(odd) {
+    border-bottom: 1px solid #F1F1F1;
+}
+
+#contextal-menu ul li i {
+    margin-right: .8rem;
+}
+
+#contextal-menu ul li:hover {
+    background-color: #dfdfdf;
+}
+
+.active {
+    background-color: rgb(149, 74, 219);
+    border: rgb(115, 30, 196);
+    color: #fff;
+    font-weight: 900;
+}
