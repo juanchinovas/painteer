@@ -110,13 +110,10 @@ const core = (function () {
     }
 
     function setCanvas(canvas, hideContextualMenu, contextMenu) {
-        // const { width: parentWidth, height: parentHeight } = getComputedStyle(canvas.parentNode);
         const ctx = canvas.getContext("2d");
         let onAction = false;
 
-        // canvas.width = parseFloat(parentWidth);
-        // canvas.height = parseFloat(parentHeight);
-        onResize();
+        onResizeCanvas();
 
 
         function mouseDown(event) {
@@ -183,7 +180,7 @@ const core = (function () {
             ctx.drawImage(opcion.img, opcion.imageCoordinateX, opcion.imageCoordinateY, +opcion.imgWidth, +opcion.imgHeight);
         }
 
-        function onResize() {
+        function onResizeCanvas() {
             const { width: parentWidth, height: parentHeight } = getComputedStyle(canvas.parentNode);
     
             canvas.width = parseFloat(parentWidth);
@@ -193,7 +190,6 @@ const core = (function () {
         }
 
         canvas.addEventListener("contextmenu", setContentMenu, false);
-        document.addEventListener("resize", onResize, false);
 
         return {
             mouseDown,
@@ -202,6 +198,7 @@ const core = (function () {
             setCanvasBgColors,
             addTextToCanvas,
             addImageToCanvas,
+            onResizeCanvas,
             removeContextMenuListerner: () => canvas.removeEventListener("contextmenu", setContentMenu),
             removeResizeListerner: () => document.removeEventListener("resize", onResize)
         }

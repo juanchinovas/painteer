@@ -8,6 +8,13 @@ window.onload = function () {
     document.addEventListener("mousedown", canvasFns.mouseDown, false);
     document.addEventListener("mouseup", canvasFns.mouseUp, false);
     document.addEventListener("mousemove", canvasFns.mouseMove, false);
+    
+    document.addEventListener("touchstart", canvasFns.mouseDown, false);
+    document.addEventListener("touchend", canvasFns.mouseUp, false);
+    document.addEventListener("touchmove", canvasFns.mouseMove, false);
+    
+
+    // window.addEventListener("resize", canvasFns.onResizeCanvas, false);
 
     const fgColorPicker = document.querySelector("#fg-color-picker");
     fgColorPicker.value = painteer.state().fgColor;

@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script');
 
-* {
+*, *::after, *::before {
     box-sizing: border-box;
 }
 
@@ -15,7 +15,6 @@ body {
 
 .page-header {
     display: flex;
-    gap: 2rem;
     padding: 0 3rem;
     background-color: white;
     box-shadow: 0 0 .2rem rgba(0, 0, 0, .5);
@@ -32,6 +31,7 @@ body {
     font-size: 2rem;
     color: rgb(149, 74, 219);
     align-self: center;
+    margin-right: 1rem;
 }
 
 
@@ -125,20 +125,11 @@ body {
                 box-shadow ease-in-out 5ms,
                 transform ease-in-out 5ms;
 }
-/*
-.controls {
-    align-items: center;
-}
 
-.controls li {
-    padding: 5px;
-    flex: 1 1 33%;
-}
-*/
 main {
     padding: .1rem 0;
     flex-grow: 2;
-    height: calc(100vh - (100px + .2rem));
+    height: calc(100vh - (102px));
 }
 
 main > canvas {
@@ -146,6 +137,7 @@ main > canvas {
     height: 100%;
     display: block;
     cursor: crosshair;
+    background-color: #fff;
 }
 
 .hide {
@@ -501,6 +493,10 @@ button i {
 
     #last-li {
         padding-left: 0;
+    }
+
+    main {
+        height: calc(100vh - (54px));
     }
 
   }
