@@ -3,53 +3,84 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../core/css/style.css">
     <title>Painteer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../core/css/style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
-    <header class="page-header">
+    <header class="page-header bg-grey">
         <h3 id="app-name">Painteer</h3>
-        <div class="container-grid-col4">
-            <div class="color-picker-container" role="button" tabindex="0">
-                <label for="bg-color-picker">Background color</label>
-                <input type="color" name="bg-color-picker" id="bg-color-picker">
-            </div>
-            <div class="color-picker-container" role="button" tabindex="0">
-                <label for="fg-color-picker">Pencil color</label>
-                <input type="color" name="fg-color-picker" id="fg-color-picker">
-            </div>
-            <div class="color-picker-chosen">
-                <ul id="lst-color-chosen"></ul>
-            </div>
-            <ul class="controls">
+        <input type="checkbox" id="menu_check"/>
+        <nav class="container-grid" id="princiapl_nav">
+            <ul>
                 <li>
-                    Pencil Size:
-                    <select name="lst-size" id="lst-size">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="4">4</option>
-                        <option value="6">6</option>
-                        <option value="8">8</option>
-                        <option value="8">10</option>
-                        <option value="8">12</option>
-                        <option value="8">14</option>
-                        <option value="8">16</option>
-                    </select>
+                    <div class="-flex -grap-1-2-rem -flex-align-items-center">
+                        <div class="square-container -dashed-border" id="eraser-container" role="button" tabindex="0">
+                            <span id="size__label">
+                                <i class="fa fa-eraser"></i>
+                            </span>
+                            <label for="eraser-container" aria-label="Eraser">Eraser</label>
+                        </div>
+                        <div class="square-container -over-hidden" id="bg-container" role="button" tabindex="1">
+                            <span id="size__label">
+                                <i class="fas fa-fill-drip"></i>
+                            </span>
+                            <label for="bg-container" aria-label="Background color">Bg color</label>
+                            <input type="color" name="bg-color-picker" id="bg-color-picker">
+                        </div>
+                        <div class="square-container -dashed-border" id="size-container" role="button" tabindex="2">
+                            <span id="size__label">1</span>
+                            <label for="size-container" aria-label="Brush size">Size</label>
+                            <div id="size__options-lst" class="options hide">
+                                <span data-value="1">1</span>
+                                <span data-value="2">2</span>
+                                <span data-value="4">4</span>
+                                <span data-value="6">6</span>
+                                <span data-value="8">8</span>
+                                <span data-value="10">10</span>
+                                <span data-value="12">12</span>
+                                <span data-value="14">14</span>
+                                <span data-value="16">16</span>
+                            </div>
+                        </div>
+                    </div>
                 </li>
                 <li>
-                    <button class="btn-save active" id="btn-save-draw" type="button">
-                        <i class="fa fa-arrow-down"></i>Save
-                    </button>
+                    <div class="-flex -grap-1-2-rem -flex-align-items-center">
+                        <div class="square-container -over-hidden" id="fg-container" role="button" tabindex="3">
+                            <span id="size__label">
+                                <i class="fas fa-paint-brush"></i>
+                            </span>
+                            <label for="fg-color-picker">Color</label>
+                            <input type="color" name="fg-color-picker" id="fg-color-picker">
+                        </div>
+                        <div class="color-picker-chosen">
+                            <ul id="lst-color-chosen"></ul>
+                        </div>
+                    </div>
+                </li>
+                <li id="last-li">
+                    <div class="-flex -grap-1-2-rem ">
+                        <div class="square-container active" id="image-container">
+                            <span>
+                                <i class="fa fa-download"></i>
+                            </span>
+                            <label for="image-container" aria-label="Eraser">Image</label>
+                        </div>
+                    </div>
                 </li>
             </ul>
-        </div>
+        </nav>
+        <label for="menu_check" class="nav-toggle-label" role="button">
+            <span></span>
+        </label>
     </header>
     <main aria-label="Painting area">
         <canvas id="canvas"></canvas>
-        <section id="text-add-dialog" class="hide" role="dialog">
+        <!-- dialogs -->
+        <section id="text-add-dialog" class="hide" role="dialog" aria-hidden="true">
             <header>
                 <h1>Add text</h1>
                 <i aria-label="Close" role="button" id="btn-close">&times;</i>
@@ -144,216 +175,60 @@
                 </form>
             </div>
         </section>
-        <section id="image-add-dialog"></section>
+        <section id="image-add-dialog" class="hide" role="dialog" aria-hidden="true">
+            <header>
+                <h1>Add image</h1>
+                <i aria-label="Close" role="button" id="btn-close">&times;</i>
+            </header>
+            <div>
+                <form id="dialog-form-add-image" method="POST">
+                    <div class="input-container flex-column">
+                        <label for="image-field">Image</label>
+                        <input type="file" capture="user" accept="image/*" name="image-field" id="image-field" required/>
+                    </div>
+                    <div class="input-container flex-column">
+                        <img alt="Image to select" id="img-selected" width="100" height="100"/>
+                    </div>
+                    <div class="input-container flex-column">
+                        <label aria-label="Image dimension">Dimension</label>
+                        <div class="input-container flex-row">
+                            <input placeholder="width" type="number" name="img-width" id="img-width" required pattern="\d+(\.\d)*" />
+                            <input placeholder="height" type="number" name="img-height" id="img-height" required pattern="\d+(\.\d)*" />
+                        </div>
+                    </div>
+                    <div class="input-container flex-column">
+                        <label aria-label="Set the image coodinate">Coordinate</label>
+                        <div class="input-container flex-row">
+                            <input type="number" name="image-coordinate-x" id="image-coordinate-x" required pattern="\d+(\.\d)*" disabled/>
+                            <input type="number" name="image-coordinate-y" id="image-coordinate-y" required pattern="\d+(\.\d)*" disabled/>
+                        </div>
+                    </div>
+                    <footer class="flex-row">
+                        <button type="button">Cancel</button>
+                        <button>Ok</button>
+                    </footer>
+                </form>
+            </div>
+        </section>
+        <!-- contextual menu -->
+        <div id="contextual-menu" class="hide" aria-hidden="true">
+            <ul>
+                <li id="add-text">
+                    <i class="fa fa-font"></i>Text
+                </li>
+                <li id="add-img">
+                    <i class="far fa-image"></i>Image
+                </li>
+            </ul>
+        </div>
     </main>
+
     <footer class="pager-footer">
         <script src="../../core/js/core.js"></script>
-        <script>
-            window.onload = function () {
-                const painteer = window.painteer;
-
-                const canvas = document.querySelector(`#canvas`);
-                setCanvas(canvas);
-
-                const fgColorPicker = document.querySelector("#fg-color-picker");
-                fgColorPicker.value = painteer.state().fgColor;
-                changeColor({ target: fgColorPicker }, fgColorPicker.parentNode, painteer.onColorFgChange);
-
-                const triggerFunc = painteer.debounce((event) => {
-                    changeColor(event, fgColorPicker.parentNode, painteer.onColorFgChange);
-                    setChosenColors(painteer.state().chosenColors);
-                }, 250);
-                fgColorPicker.addEventListener("input", triggerFunc, false);
-
-                const bgColorPicker = document.querySelector("#bg-color-picker");
-                bgColorPicker.value = painteer.state().bgColor;
-                changeColor({ target: bgColorPicker }, bgColorPicker.parentNode, painteer.onColorBgChange);
-                bgColorPicker.addEventListener("input", (event) => {
-                    changeColor(event, bgColorPicker.parentNode, painteer.onColorBgChange);
-                }, false);
-
-
-                setChosenColors(painteer.state().chosenColors);
-
-                document.querySelector("form#dialog-form-add-text").onsubmit = function(event) {
-                    event.preventDefault();
-
-                    const form = painteer.formToObject(event.target);
-                    addTextToCanvas(canvas, form);
-
-                    const parent = this.parentElement.parentElement;
-                    parent.classList.add("hide");
-
-                    return false;
-                };
-
-                document.querySelector("#contextal-menu ul li#add-text").
-                addEventListener("click", (event) => {
-                    event.preventDefault();
-                    console.log(event, "sdjaks");
-                    const dialog = document.querySelector("#text-add-dialog");
-                    const mousePosition = painteer.getMousePosition(canvas, event);
-                    
-                    dialog.querySelector("#text-font-coordinate-x").value = mousePosition.x;
-                    dialog.querySelector("#text-font-coordinate-y").value = mousePosition.y;
-
-                    dialog.classList.remove("hide");
-                    hideContextualMenu();
-
-                    return false;
-                }, false);
-
-                document.querySelector("#text-add-dialog #btn-close").
-                addEventListener("click", (event) => {
-                    event.preventDefault();
-
-                    const parent = event.target.parentElement.parentElement;
-                    parent.classList.add("hide");
-                    
-                    return false;
-                }, false);
-
-                // lst-size
-                const sizes = document.querySelector("#lst-size");
-                sizes.value = painteer.state().lineSize;
-                sizes.addEventListener("change", (event) => {
-                    event.preventDefault();
-
-                    painteer.state().lineSize = +event.target.value
-                    
-                    return false;
-                }, false);
-
-                function changeColor(event, parentPicker, fn) {
-                    parentPicker.style.backgroundColor = event.target.value;
-                    parentPicker.style.color = painteer.isDarkColor(event.target.value) ? "white" : "black";
-                    fn && fn(event.target.value);
-
-                    if (fn === painteer.onColorBgChange) {
-                        setCanvasColors(event.target.value);
-                    }
-                }
-
-                function setChosenColors(chosenColors) {
-                    const chosenColor = document.querySelector(`.color-picker-chosen #lst-color-chosen`);
-                    for (let i = 0, len = chosenColors.length; i < len; i++) {
-                        const span = chosenColor.querySelector(`#chosen-${i}`) || document.createElement("span");
-                        span.id = `chosen-${i}`;
-                        span.role = `button`;
-                        span.setAttribute("data-color", chosenColors[i]);
-                        span.setAttribute("title", chosenColors[i]);
-                        span.setAttribute("aria-lable", `Color ${chosenColors[i]}`);
-                        span.style.backgroundColor = chosenColors[i];
-
-                        if (!chosenColor.querySelector(`#chosen-${i}`)) {
-                            span.addEventListener("click", (event) => {
-                                painteer.onColorFgChange(event.target.dataset.color);
-                                changeColor({ target: { value: event.target.dataset.color } }, fgColorPicker.parentNode, painteer.onColorFgChange);
-                            }, false);
-                            
-                            const li = document.createElement("li");
-                            li.id = `li-chosen-${i}`;
-                            li.appendChild(span);
-                            chosenColor.appendChild(li);
-
-                        }
-                    }
-                }
-
-                function setCanvasColors(bgColor) {
-                    const canvas = document.querySelector(`#canvas`);
-                    const {offsetHeight, offsetWidth} = canvas;
-
-                    var ctx = canvas.getContext("2d");
-                    ctx.fillStyle = bgColor;
-                    ctx.fillRect(0, 0, offsetWidth, offsetHeight);
-
-                }
-
-                function setCanvas(canvas) {
-                    const {width: parentWidth, height: parentHeight} = getComputedStyle(canvas.parentNode);
-                    const ctx = canvas.getContext("2d");
-                    let onAction = false;
-                    
-                    canvas.width = parseFloat(parentWidth);
-                    canvas.height = parseFloat(parentHeight);
-                    
-
-                    document.addEventListener("mousedown", (event) => {
-                        if (event.target !== canvas) return;
-
-                        hideContextualMenu();
-                        const mousePosition = painteer.getMousePosition(canvas, event);
-
-                        ctx.strokeStyle = painteer.state().fgColor;
-                        ctx.lineWidth = painteer.state().lineSize;
-
-                        ctx.beginPath();
-                        ctx.moveTo(mousePosition.x, mousePosition.y);
-
-                        onAction = true;
-                    }, false);
-
-                    document.addEventListener("mouseup", (event) => {
-                        const mousePosition = painteer.getMousePosition(canvas, event);
-
-                        ctx.moveTo(mousePosition.x, mousePosition.y);
-                        ctx.closePath();
-
-                        onAction = false;
-                    }, false);
-
-                    document.addEventListener("mousemove", (event) => {
-                        if (onAction) {
-                            const mousePosition = painteer.getMousePosition(canvas, event);
-                            ctx.lineTo(mousePosition.x, mousePosition.y);
-                            ctx.stroke();
-                        }
-                    }, false);
-
-                    canvas.addEventListener("contextmenu", (event) => {
-                       event.preventDefault();
-                       
-                       const contextMenu = document.querySelector("#contextal-menu");
-                       contextMenu.style.top = `${event.clientY}px`;
-                       contextMenu.style.left = `${event.clientX}px`;
-                       contextMenu.classList.remove("hide");
-
-                    }, false);
-
-                    // document.querySelectorAll("#contextal-menu ul li")
-                    
-                }
-
-                function addTextToCanvas(canvas, opcion) {
-                    const ctx = canvas.getContext("2d");
-                    ctx.font = `${opcion.textFontSize}px ${opcion.textFont}`;
-                    if (opcion.textStyle === "fill") {
-                        ctx.fillStyle = opcion.textColor;
-                        ctx.fillText(opcion.textField, opcion.textFontCoordinateX, opcion.textFontCoordinateY);
-                    } else   {
-                        ctx.strokeStyle = opcion.textColor;
-                        ctx.strokeText(opcion.textField, opcion.textFontCoordinateX, opcion.textFontCoordinateY);
-                    }
-                }
-                
-                function hideContextualMenu() {
-                    document.querySelector("#contextal-menu").classList.add("hide");
-                }
-
-            }
-        </script>
+        <script src="./vanilla.js"></script>
+        <a id="download" download aria-hidden="true"></a>
     </footer>
-    <div id="contextal-menu" class="hide">
-        <ul class="controls">
-            <li id="add-text">
-                <i class="fa fa-font"></i>Text
-            </li>
-            <li id="add-img">
-                <i class="fa fa-file-image-o"></i>Image
-            </li>
-        </ul>
-    </div>
+    
 </body>
 
 </html>

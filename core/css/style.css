@@ -10,15 +10,21 @@ body {
     background-color: #F1F1F1;
     display: flex;
     flex-direction: column;
+    user-select: none;
 }
 
 .page-header {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-column-gap: 2rem;
-    padding: 0 5rem;
+    display: flex;
+    gap: 2rem;
+    padding: 0 3rem;
     background-color: white;
     box-shadow: 0 0 .2rem rgba(0, 0, 0, .5);
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-header > input[type=checkbox] {
+    display: none;
 }
 
 #app-name {
@@ -28,15 +34,26 @@ body {
     align-self: center;
 }
 
-.container-grid-col4 {
-    display: grid;
-    grid-template-columns: auto auto 1fr 1fr;
-    grid-template-rows: 100px;
+
+.container-grid {
+    display: flex;
+    flex: 1 1 10rem;
+    flex-wrap: wrap;
+}
+
+.container-grid > ul > li:nth-child(odd) {
+    border-left: 1px solid #dfdfdf;
+    border-right: 1px solid #dfdfdf;
+    padding: 0 1.2rem;
+}
+
+.container-grid > ul > li:last-child {
+    border-right: none;
+    padding-right: 0;
 }
 
 .color-picker-container {
     width: 100px;
-    /*border: 5px solid #f8f8f8;*/
     margin: 5px;
     padding: 1.5rem;
     overflow: hidden;
@@ -44,10 +61,6 @@ body {
     text-align: center;
     cursor: pointer;
     transition: box-shadow 5ms;
-}
-
-.color-picker-container:hover, .color-picker-chosen ul li:hover {
-    box-shadow: 0 0 .5rem rgba(149, 74, 219, .5);
 }
 
 .color-picker-container label {
@@ -79,10 +92,13 @@ body {
     position: relative;
     overflow-y: auto;
     overflow-x: hidden;
-    margin: 5px;
+    transition: background-color ease-in-out 5ms, 
+                color ease-in-out 5ms, 
+                box-shadow ease-in-out 5ms,
+                transform ease-in-out 5ms;
 }
 
-.color-picker-chosen ul, .controls {
+.color-picker-chosen ul, nav#princiapl_nav ul  {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -94,7 +110,6 @@ body {
     width: 2rem;
     height: 2rem;
     display: block;
-    margin: 2px;
     cursor: pointer;
     transition: box-shadow 5ms;
 }
@@ -103,25 +118,23 @@ body {
     width: 100%;
     height:  100%;
     display: block;
+    border: 4px solid white;
+    border-radius: 1rem;
+    transition: background-color ease-in-out 5ms, 
+                color ease-in-out 5ms, 
+                box-shadow ease-in-out 5ms,
+                transform ease-in-out 5ms;
 }
-
-
-
+/*
 .controls {
-    flex-direction: column;
+    align-items: center;
 }
 
 .controls li {
     padding: 5px;
+    flex: 1 1 33%;
 }
-
-.controls li button, .controls li select {
-    width: 100%;
-    text-align: center;
-    text-transform: uppercase;
-    padding: .2rem;
-}
-
+*/
 main {
     padding: .1rem 0;
     flex-grow: 2;
@@ -132,6 +145,7 @@ main > canvas {
     width: 100%;
     height: 100%;
     display: block;
+    cursor: crosshair;
 }
 
 .hide {
@@ -239,7 +253,7 @@ button i {
     margin-right: .2rem;
 }
 
-#contextal-menu {
+#contextual-menu {
     padding: .5rem;
     background-color: #fff;
     width: 200px;
@@ -251,13 +265,13 @@ button i {
     z-index: 20000;
 }
 
-#contextal-menu ul {
+#contextual-menu ul {
     padding: 0;
     margin: 0;
     list-style: none;
 }
 
-#contextal-menu ul li {
+#contextual-menu ul li {
     padding: .2rem .53212rem;
     display: flex;
     align-items: center;
@@ -265,15 +279,15 @@ button i {
     cursor: pointer;
 }
 
-#contextal-menu ul li:nth-child(odd) {
+#contextual-menu ul li:nth-child(odd) {
     border-bottom: 1px solid #F1F1F1;
 }
 
-#contextal-menu ul li i {
+#contextual-menu ul li i {
     margin-right: .8rem;
 }
 
-#contextal-menu ul li:hover {
+#contextual-menu ul li:hover {
     background-color: #dfdfdf;
 }
 
@@ -281,5 +295,212 @@ button i {
     background-color: rgb(149, 74, 219);
     border: rgb(115, 30, 196);
     color: #fff;
-    font-weight: 900;
 }
+
+.bg-grey {
+    background-color: #F1F1F1;
+}
+
+.square-container {
+    padding: .5rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: relative;
+    transition: background-color ease-in-out 5ms, 
+                color ease-in-out 5ms, 
+                box-shadow ease-in-out 5ms,
+                transform ease-in-out 5ms;
+}
+
+.square-container:hover {
+    outline: 2px solid white;
+    box-shadow: 0 0 .2rem  rgba(255, 255, 255, .5);
+}
+
+.square-container label {
+    font-size: 1rem;
+}
+
+.options {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 3rem;
+    box-shadow: 0 0 .2rem  rgba(0, 0, 0, .5);
+    z-index: 5;
+}
+
+.options span {
+    padding: 1rem;
+    border: 1px solid #F1F1F1;
+    cursor: pointer;
+    color: black;
+    flex: 1 1 50%;
+    user-select: none;
+}
+
+.options span:hover {
+    background-color: aquamarine;
+}
+
+#size__options-lst {
+    opacity: 0;
+    transition: opacity ease-in-out 5ms;
+}
+
+#size-container:hover #size__options-lst {
+    display: flex !important;
+    opacity: 1;
+}
+
+#size-container {
+    z-index: 50000;
+ }
+
+.-dashed-border {
+    border: 1px dashed;
+}
+
+.-over-hidden {
+    overflow: hidden;
+    position: relative;
+}
+
+#fg-container input[type='color'],
+#bg-container input[type='color'] {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+}
+
+.-grap-1-2-rem {
+    gap: 1.2rem;
+}
+
+.-flex {
+    display: flex;
+}
+
+.-flex-align-items-center {
+    align-items: center;
+}
+
+#fg-container {
+    margin-left: 1.5rem;
+}
+
+#fg-container ~.color-picker-chosen {
+    padding-left: 1.5rem;
+    border-left: 1px solid #dfdfdf;
+    width: 280px;
+    max-height: 100px;
+}
+
+.color-picker-container:hover, 
+.color-picker-chosen ul li:hover > span,
+.square-container:hover {
+    box-shadow: 0 0 .5rem rgba(149, 74, 219, .5);
+    transform: scale(1.1, 1.1);
+}
+
+#download {
+    opacity: 0;
+    display: none;
+}
+
+.nav-toggle-label {
+    height: 100%;
+    display: none;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .nav-toggle-label span,
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    display: block;
+    background: black;
+    height: 2px;
+    width: 2em;
+    border-radius: 2px;
+  }
+  
+  .nav-toggle-label span::before,
+  .nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+  }
+  
+  .nav-toggle-label span::before {
+    bottom: 7px;
+  }
+  
+  .nav-toggle-label span::after {
+    top: 7px;
+  }
+
+  @media screen and (max-width: 800px) {
+    label[for=menu_check] {
+        display: flex;
+    }
+
+    nav#princiapl_nav {
+        position: absolute;
+        background-color: #F1F1F1;
+        top: 54px;
+        right: 0;
+        box-shadow: 0 0 .2rem rgba(0, 0, 0, .5);
+        transform: scale(1, 0);
+        transform-origin: top;
+        transition: transform 500ms ease-in-out;
+        width: 100%;
+    }
+
+    nav#princiapl_nav > ul {
+        display: block;
+        width: 100%;
+    }
+    
+    nav#princiapl_nav ul li .-flex {
+        display: block;
+        margin-bottom: 1.5rem;
+    }
+    
+    nav#princiapl_nav ul .-flex .square-container {
+        margin-bottom: .5rem;
+    }
+    
+    
+    .page-header > input[type=checkbox]:checked ~ nav#princiapl_nav {
+        transform: scale(1,1);
+    }
+    
+
+    #fg-container {
+        margin-left: 0;
+    }
+
+    #app-name {
+        margin: 0.5rem 0;
+    }
+
+    .page-header {
+        padding: 0 1rem;
+    }
+
+    #last-li {
+        padding-left: 0;
+    }
+
+  }
