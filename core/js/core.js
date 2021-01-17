@@ -1,7 +1,7 @@
 
 
 const core = (function () {
-    const innerState = {
+    let innerState = {
         fgColor: "#000000",
         bgColor: "#FFFFFF",
         chosenColors: ["#000000", "#ff0000", "#ff00ea", "#1e00ff", "#0091ff", "#00ffee", "#44ff00"],
@@ -10,13 +10,13 @@ const core = (function () {
     };
 
     const hexToRgb = hex => {
-        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex || "");
     
         return result ? {
             r: parseInt(result[1], 16),
             g: parseInt(result[2], 16),
             b: parseInt(result[3], 16),
-        } : null
+        } : null;
     }
     
     function isDarkColor(hexColor) {
@@ -199,8 +199,8 @@ const core = (function () {
             addTextToCanvas,
             addImageToCanvas,
             onResizeCanvas,
-            removeContextMenuListerner: () => canvas.removeEventListener("contextmenu", setContentMenu),
-            removeResizeListerner: () => document.removeEventListener("resize", onResize)
+            removeContextMenuListerner: () => canvas.removeEventListener("contextmenu", setContentMenu)/*,
+            removeResizeListerner: () => document.removeEventListener("resize", onResize)*/
         }
 
     }
@@ -212,7 +212,7 @@ const core = (function () {
         formToObject,
         debounce,
         isDarkColor,
-        state: () => innerState,
+        state: (state) => (!state && innerState) || (innerState = {...innerState, ...state}),
         reduce,
         downloadDraw,
         setCanvas

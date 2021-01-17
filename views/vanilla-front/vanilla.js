@@ -9,10 +9,6 @@ window.onload = function () {
     document.addEventListener("mouseup", canvasFns.mouseUp, false);
     document.addEventListener("mousemove", canvasFns.mouseMove, false);
     
-    document.addEventListener("touchstart", canvasFns.mouseDown, false);
-    document.addEventListener("touchend", canvasFns.mouseUp, false);
-    document.addEventListener("touchmove", canvasFns.mouseMove, false);
-    
 
     // window.addEventListener("resize", canvasFns.onResizeCanvas, false);
 
@@ -42,11 +38,8 @@ window.onload = function () {
         const form = painteer.formToObject(event.target);
         canvasFns.addTextToCanvas(form);
 
-        const parent = painteer.reduce(function(el) {
-            return el.getAttribute("role") ==='dialog';
-        }, this.parentElement);
-
-        parent.classList.add("hide");
+        
+        closeDialog(event);
 
         return false;
     };
@@ -61,11 +54,8 @@ window.onload = function () {
 
         canvasFns.addImageToCanvas(form);
 
-        const parent = painteer.reduce(function(el) {
-            return el.getAttribute("role") ==='dialog';
-        }, this.parentElement);
-
-        parent.classList.add("hide");
+        
+        closeDialog(event);
 
         return false;
     };

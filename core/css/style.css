@@ -158,7 +158,7 @@ main > canvas {
     top: 0;
     left: 50%;
     transform: translate(-50%, 0);
-    z-index: 1000;
+    z-index: 10001;
 }
 
 [role=dialog] header {
@@ -351,7 +351,7 @@ button i {
 }
 
 #size-container {
-    z-index: 50000;
+    z-index: 9999;
  }
 
 .-dashed-border {
