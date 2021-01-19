@@ -157,9 +157,9 @@ const core = (function () {
 
         }
 
-        function setCanvasBgColors(bgColor) {
+        function setCanvasBgColors() {
             const { offsetHeight, offsetWidth } = canvas;
-            ctx.fillStyle = bgColor;
+            ctx.fillStyle = innerState.bgColor;
             ctx.fillRect(0, 0, offsetWidth, offsetHeight);
     
         }

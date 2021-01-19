@@ -140,6 +140,14 @@ main > canvas {
     background-color: #fff;
 }
 
+.erasing {
+    cursor: url('./delete.png'), auto;
+}
+
+.painting {
+    cursor: url('./writing.png'), auto;
+}
+
 .hide {
     display: none !important;
 }
