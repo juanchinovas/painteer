@@ -57,6 +57,7 @@ export default {
         },
         onAddText(event) {
             const position = painteer.getMousePosition(this.$refs.refCanvas, event);
+            console.log(position);
             this.onAddTextOpenDialogListener(position);
             this.closeContextualMenu();
         },

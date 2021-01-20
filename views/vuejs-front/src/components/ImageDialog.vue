@@ -80,7 +80,8 @@ export default {
             }, event.target.parentNode);
 
             const form = painteer.formToObject(parent);
-            this.canvasFns.canvasFns.addTextToCanvas(form);
+            form.img = this.$refs.imgSelected;
+            this.canvasFns.canvasFns.addImageToCanvas(form);
 
             this.closeDialog(event);
 
@@ -95,9 +96,8 @@ export default {
 
             reader.readAsDataURL(file);
 
-            reader.onload = function() {
-                this.imgSelected.src = reader.result;
-                // document.querySelector("#img-selected").src = reader.result;
+            reader.onload = () => {
+                this.$refs.imgSelected.src = reader.result;
             };
         }
     }

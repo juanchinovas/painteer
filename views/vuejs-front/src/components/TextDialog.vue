@@ -94,7 +94,7 @@
                             id="text-font-coordinate-y" 
                             required
                             pattern="\d+(\.\d)*" disabled
-                            :value="clickPosition && clickPosition.x"/>
+                            :value="clickPosition && clickPosition.y"/>
                     </div>
                 </div>
                 <footer class="flex-row">
