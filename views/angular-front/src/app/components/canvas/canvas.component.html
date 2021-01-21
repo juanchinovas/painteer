@@ -1,0 +1,19 @@
+<main aria-label="Painting area">
+    <canvas #refCanvas id="canvas"></canvas>
+    <!-- contextual menu -->
+    <div
+        #refContextualMenu
+        id="contextual-menu"
+        class="hide"
+        aria-hidden="true"
+    >
+        <ul>
+            <li id="add-text" (click)=onAddText($event)>
+                <i class="fa fa-font"></i>Text
+            </li>
+            <li id="add-img" (click)=onAddImg($event)>
+                <i class="far fa-image"></i>Image
+            </li>
+        </ul>
+    </div>
+</main>

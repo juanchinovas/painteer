@@ -1,0 +1,15 @@
+<app-header (onBgChange)="onBgChange"></app-header>
+<app-canvas
+    (onAddImageOpenDialogListener)="onAddImageOpenDialogListener($event)"
+    (onAddTextOpenDialogListener)="onAddTextOpenDialogListener($event)"
+    (onCanvasReadyListener)="setCanvasFns($event)"></app-canvas>
+<app-text-dialog
+    [canvasFns]="canvasFns"
+	[show]="showAddTextDialog"
+	[clickPosition]="clickPosition"
+	(onDialogCloseListener)="showAddTextDialog = false"></app-text-dialog>
+<app-image-dialog
+    [canvasFns]="canvasFns"
+	[show]="showAddImageDialog"
+	[clickPosition]="clickPosition"
+	(onDialogCloseListener)="showAddImageDialog = false"></app-image-dialog>
