@@ -4,3 +4,5 @@
 See the the JS vanilla front-end.
 
 [https://juanchinovas.github.io/painteer/views/vanilla-front/](https://juanchinovas.github.io/painteer/views/vanilla-front/)
+
+![alt painteer home](./painteer.PNG)
