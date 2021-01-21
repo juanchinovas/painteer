@@ -106,6 +106,7 @@ export default {
   methods: {
     changeFgColor(event) {
         this.state.fgColor = event.target.dataset.color;
+        painteer.state(this.state);
     },
     changeSize(event) {
         event.preventDefault();
@@ -121,8 +122,8 @@ export default {
         this.state.isErasing = !this.state.isErasing; 
         painteer.state(this.state);
     },
-    downloadDraw() {
-        painteer.downloadDraw();
+    downloadDraw(event) {
+        painteer.downloadDraw(event);
     }
   },
   computed: {
